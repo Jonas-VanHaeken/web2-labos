@@ -2,7 +2,6 @@ package domain.db;
 
 import domain.model.Student;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Database {
@@ -10,7 +9,8 @@ public class Database {
     Student kristien = new Student("Melaerts", "Kristien", "Chemie", 21);
     Student elke = new Student("Steegmans", "Elke", "Vroedkunde", 16);
     Student jan = new Student("Van Hee", "Jan", "Verpleegkunde", 18);
-    ArrayList<Student> students;
+
+    private ArrayList<Student> students;
 
     public Database(){
         students = new ArrayList<Student>();
@@ -24,17 +24,16 @@ public class Database {
         students.add(student);
     }
 
-    public String zoeken(String voornaam, String achteraam){
-       for (Student student:students) {
-            if (student.getNaam() == achteraam && student.getVoornaam() == voornaam){
-                return "Je vroeg naar volgende gegevens: " + achteraam + " " + voornaam + " (" + student.getLeeftijd() + " jaar): " + student.getStudierichting();
-            }
-        }
-        return "Helaas, de student waarnaar je vraagt is niet gevonden.";
+    public ArrayList<Student> getList(){
+        return students;
     }
 
-    public static void main(String[] args) {
-        Database db = new Database();
-        System.out.println(db.zoeken("Jan","Van Hee"));
+    public String zoeken(String voornaam, String achternaam){
+       for (Student student:students) {
+            if (student.getNaam().equals(achternaam) && student.getVoornaam().equals(voornaam)){
+                return "Je vroeg naar volgende gegevens: " + achternaam + " " + voornaam + " (" + student.getLeeftijd() + " jaar): " + student.getStudierichting();
+            }
+        }
+        return null;
     }
 }
